@@ -1,0 +1,115 @@
+package AdVance.dev;
+
+import java.util.Arrays;
+import java.util.Scanner;
+
+class Student {
+    private String name;
+    private int age;
+    private String address;
+    private String phoneNumber;
+    private double averageScore;
+
+    // Constructor
+    public Student() {
+    }
+
+    // Getter và Setter
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        if (age > 0) {
+            this.age = age;
+        } else {
+            System.out.println("Tuổi phải là số nguyên lớn hơn 0.");
+        }
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public double getAverageScore() {
+        return averageScore;
+    }
+
+    public void setAverageScore(double averageScore) {
+        if (averageScore >= 0) {
+            this.averageScore = averageScore;
+        } else {
+            System.out.println("Điểm trung bình phải là số thực lớn hơn hoặc bằng 0.");
+        }
+    }
+}
+
+public class MainApp {
+    public static void main(String[] args) {
+        Student[] students = new Student[10];
+
+        input(students);
+        print(students);
+        sortStudentsByAverageScore(students);
+        System.out.println("\nDanh sách sinh viên sau khi được sắp xếp theo điểm trung bình tăng dần:");
+        print(students);
+    }
+
+    public static void input(Student[] students) {
+        Scanner scanner = new Scanner(System.in);
+
+        for (int i = 0; i < students.length; i++) {
+            Student student = new Student();
+            System.out.println("Nhập thông tin cho sinh viên thứ " + (i + 1) + ":");
+            System.out.print("Tên: ");
+            student.setName(scanner.nextLine());
+            System.out.print("Tuổi: ");
+            student.setAge(Integer.parseInt(scanner.nextLine()));
+            System.out.print("Địa chỉ: ");
+            student.setAddress(scanner.nextLine());
+            System.out.print("Số điện thoại: ");
+            student.setPhoneNumber(scanner.nextLine());
+            System.out.print("Điểm trung bình: ");
+            student.setAverageScore(Double.parseDouble(scanner.nextLine()));
+
+            students[i] = student;
+        }
+    }
+
+    public static void print(Student[] students) {
+        System.out.println("\nDanh sách sinh viên:");
+        for (int i = 0; i < students.length; i++) {
+            System.out.println("Sinh viên thứ " + (i + 1) + ":");
+            System.out.println("Tên: " + students[i].getName());
+            System.out.println("Tuổi: " + students[i].getAge());
+            System.out.println("Địa chỉ: " + students[i].getAddress());
+            System.out.println("Số điện thoại: " + students[i].getPhoneNumber());
+            System.out.println("Điểm trung bình: " + students[i].getAverageScore());
+            System.out.println();
+        }
+    }
+
+    public static void sortStudentsByAverageScore(Student[] students) {
+        Arrays.sort(students, (s1, s2) -> Double.compare(s1.getAverageScore(), s2.getAverageScore()));
+    }
+}
